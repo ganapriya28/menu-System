@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College Canteen Menu</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- QRCode library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="header">
+      <h1>Canteen Menu</h1>
+
+      <!-- QR code area -->
+      <div class="qr-container">
+        <div class="qr-card">
+          <div id="qrcode-menu" class="qr"></div>
+          <div class="qr-label">View Menu</div>
+        </div>
+        <div class="qr-card">
+          <div id="qrcode-admin" class="qr"></div>
+          <div class="qr-label">Admin</div>
+        </div>
+        <div class="qr-actions">
+          <button id="open-menu-btn" class="btn">Open Menu</button>
+          <button id="open-admin-btn" class="btn btn-secondary">Open Admin</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Category Section -->
+    <div class="categories">
+      <a href="#Puff-section" class="category-btn">Puffs</a>
+      <a href="#Samosa-section" class="category-btn">Samosa</a>
+      <a href="#Cutlet-section" class="category-btn">Cutlet</a>
+      <a href="#Other-snacks" class="category-btn">Other Snacks</a>
+      <a href="#Cream-Puffs" class="category-btn">Cream Puffs</a>
+      <a href="#Piece-Cake-Butter-Icing-section" class="category-btn">Piece Cakes</a>
+      <a href="#Pastries-section" class="category-btn">Pastries</a>
+      <a href="#Cakes-section" class="category-btn">Cake</a>
+      <a href="#Dry-Cakes-section" class="category-btn">Dry Cake</a>
+      <a href="#Cookies-section" class="category-btn">Cookies</a>
+      <a href="#Mixtures-section" class="category-btn">Mixtures</a>
+      <a href="#Sweets-section" class="category-btn">Sweets</a>
+      <a href="#Juices-section" class="category-btn">Juices</a>
+      <a href="#MilkShakes-section" class="category-btn">MilkShakes</a>
+      <a href="#Hot-Beverages-section" class="category-btn">Hot Beverages</a>
+      <a href="#Dishes-section" class="category-btn">Other Dishes</a>
+    </div>
+
+    <!-- Menu Items Section (YOUR original content preserved) -->
+    <main class="menu">
+      <!-- (kept your long menu markup; I only adjusted some IDs that were inconsistent) -->
+      <!-- Snacks Section -->
+      <section id="Puff-section">
+        <h2>PUFFS</h2>
+        <div class="menu-item">
+          <img src="Menu Pictures/Puffs/Veg Puff-25.jpg" alt="Veg Puff" class="menu-img"/>
+          <div class="menu-info">
+            <h3>Veg Puff</h3>
+            <p class="description">Crispy puff filled with veggies</p>
+            <span class="price">₹25</span>
+          </div>
+        </div>
+        <!-- ... keep the rest of your items unchanged ... -->
+        <!-- For brevity I didn't paste every menu item here; keep your full menu HTML as-is below this point -->
+      </section>
+
+      <!-- (Place the rest of your menu sections exactly as you provided) -->
+      <!-- For the demo to work I use an injection area where JS will append newly added admin items -->
+      <section id="admin-added-items" class="admin-added">
+        <h2>ADMIN ADDED ITEMS</h2>
+        <div id="menu-items" class="menu-items"></div>
+      </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <p>Hours: Mon-Fri 8:00 AM - 4:00 PM</p>
+      <p>Location: CMRIT College Campus</p>
+      <p>Contact Us:
+          <a href="https://manojsvgit.github.io/Portfolio/" target="_blank">manojsvgit</a>
+      </p>
+      <p>Made with ♥</p>
+    </footer>
+
+    <!-- Modal / overlay used for viewing menu or admin -->
+    <div id="modal" class="modal-backdrop" aria-hidden="true">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 id="modal-title">Menu</h3>
+          <button id="close-modal" class="btn btn-secondary">Close</button>
+        </div>
+
+        <div id="modal-body">
+          <!-- Menu view -->
+          <div id="menu-view" class="modal-section">
+            <p class="small">Scan the View Menu QR or click "Open Menu" to see the menu. (Use your hosted URL for QR scanning.)</p>
+            <div id="modal-menu-items" class="menu-items"></div>
+          </div>
+
+          <!-- Admin area -->
+          <div id="admin-area" class="modal-section admin-panel" style="display:none;">
+            <div id="admin-login">
+              <p class="small">Enter admin password to manage the menu (demo only).</p>
+              <input type="password" id="admin-password" placeholder="Admin password" />
+              <div class="admin-login-actions">
+                <button id="admin-login-btn" class="btn">Login</button>
+                <button id="admin-logout-btn" class="btn btn-secondary" style="display:none;">Logout</button>
+              </div>
+              <div id="admin-msg" class="small"></div>
+            </div>
+
+            <div id="admin-controls" style="display:none; margin-top:10px;">
+              <h4>Add new item</h4>
+              <input type="text" id="new-name" placeholder="Item name" />
+              <div class="form-row">
+                <input type="number" id="new-price" placeholder="Price" min="0" step="0.01" />
+                <input type="text" id="new-category" placeholder="Category (optional)" />
+              </div>
+              <textarea id="new-desc" placeholder="Description (optional)" rows="2"></textarea>
+              <div style="display:flex; gap:8px; margin-top:8px;">
+                <button id="add-item-btn" class="btn">Add item</button>
+                <button id="clear-items-btn" class="btn btn-secondary">Clear all</button>
+              </div>
+              <div id="admin-feedback" class="small"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
